@@ -8,9 +8,11 @@
 
 #include <SOIL.h>
 
-std::map<std::string, Texture2D>	ResourceManager::Textures;
-std::map<std::string, Shader>		ResourceManager::Shaders;
-
+std::map<std::string, Texture2D>				ResourceManager::Textures;
+std::map<std::string, Shader>					ResourceManager::Shaders;
+//std::vector<GLuint> 							ResourceManager::tileTextures;
+//std::vector<std::unique_ptr<MapLayer>> 			ResourceManager::mapLayers;
+//std::map<std::string, Map>						ResourceManager::Maps;
 Shader 	 ResourceManager::LoadShader(const GLchar *vShaderFile, const GLchar *fShaderFile, const GLchar *gShaderFile, std::string name){
 	
 	Shaders[name] = loadShaderFromFile(vShaderFile, fShaderFile, gShaderFile);
@@ -24,6 +26,30 @@ Texture2D ResourceManager::LoadTexture(const GLchar *file, GLboolean alpha, std:
 	return Textures[name];
 
 }
+/*
+void ResourceManager::LoadMap(const GLchar *file, std::string name)
+{
+	tmx::Map map;
+	map.load(file);
+	
+
+	loadMapTexturesFromFile(map);
+
+	const std::vector<tmx::Layer::Ptr>& layers = map.getLayers();
+
+	for(uint i = 0; i <layers.size(); ++i)
+	{
+		if(layers[i]->getType() == tmx::Layer::Type::Tile)
+		{
+				mapLayers.emplace_back(std::make_unique<MapLayer>(map, i, tileTextures));
+		}
+	}	
+}
+std::vector<std::unique_ptr<MapLayer>>& ResourceManager::GetMap()
+{
+	return mapLayers;
+}
+*/
 Texture2D& ResourceManager::GetTexture(std::string name){
 	return Textures[name];
 }
@@ -99,7 +125,36 @@ Texture2D ResourceManager::loadTextureFromFile(const GLchar *file, GLboolean alp
 	SOIL_free_image_data(image);
 	return texture;
 }
+/*std::vector<GLuint> ResourceManager::GetTileTextures()
+{
+	return tileTextures;
+}*/
+/*
+void ResourceManager::loadMapTexturesFromFile(const tmx::Map& map) //might take a shader argument
+{
+	const std::vector<tmx::Tileset>& tilesets = map.getTilesets();
+	for(tmx::Tileset ts : tilesets)
+	{
+		// Transparency alpha stuff later
+//		tileTextures.emplace_back(0);
+		Texture2D texture;
+		texture.Image_Format = GL_RGBA;
+		texture.Internal_Format = GL_RGBA;
+		int width, height;
+		const char *path = ts.getImagePath().c_str();
+		unsigned char *image = SOIL_load_image(path, &width, &height, 0, texture.Image_Format == GL_RGBA ? SOIL_LOAD_RGBA : SOIL_LOAD_RGB );
+		texture.GenerateMapTexture(width, height, image);
+		SOIL_free_image_data(image);
+		tileTextures.emplace_back(texture.id());
 
+
+	}
+}*/
+	// Unsure if need these
+//	glCheck(glClearColor(0.6f, 0.8f, 0.92f, 1.f));
+//    glCheck(glEnable(GL_BLEND));
+//    glCheck(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
+//    glCheck(glBlendEquation(GL_FUNC_ADD));
 
 
 

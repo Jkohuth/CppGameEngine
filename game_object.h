@@ -6,6 +6,7 @@
 
 #include "texture.h"
 #include "sprite_renderer.h"
+/*
 // Represents the four possible directions
 enum Direction {
 	UP,
@@ -13,7 +14,7 @@ enum Direction {
 	DOWN,
 	LEFT
 };
-
+*/
 class GameObject
 {
 public:

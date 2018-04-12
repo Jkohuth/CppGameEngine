@@ -5,12 +5,13 @@
 #define GLEW_STATIC
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
-
+#define GLM_FORCE_RADIANS
 #include <iostream>
 
 #include "gl_macros.hpp"
 #include "game.h"
 #include "resource_manager.h"
+#include "global_enumerations.h"
 
 //GLFW function declerations
 void key_callback(GLFWwindow * window, int key, int scancode, int action, int mode);
@@ -21,7 +22,7 @@ const GLuint SCREEN_WIDTH = 800;
 const GLuint SCREEN_HEIGHT = 600;
 
 Game Jump(SCREEN_WIDTH, SCREEN_HEIGHT);
-
+InputHandler InputHandler;
 
 int main(int argc, char * argv[])
 {
@@ -30,7 +31,7 @@ int main(int argc, char * argv[])
 	std::cout << "glfw Initialization\n";
 
 	//Create a GLFWwindow object that we can use for GLFW's functions
-	GLFWwindow *window = glfwCreateWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "RPG", NULL, NULL);
+	GLFWwindow *window = glfwCreateWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Jump", NULL, NULL);
 	if(!window){
 		glfwTerminate();
 		exit(EXIT_FAILURE);
@@ -67,7 +68,7 @@ int main(int argc, char * argv[])
 	GLfloat lastFrame = 0.0f;
 
 	// Start Game within Menu State
-	Jump.State = GAME_START;
+	Jump.State = GlobalEnum::GAME_START;
 
 
 	while( !glfwWindowShouldClose(window) ){
@@ -105,11 +106,18 @@ void key_callback(GLFWwindow * window, int key, int scancode, int action, int mo
 	if(key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
 		glfwSetWindowShouldClose(window, GL_TRUE);
 	if(key >=0 && key <1024){
-		if(action == GLFW_PRESS)
-			Jump.Keys[key] = GL_TRUE;
-		else if(action == GLFW_RELEASE)
-			Jump.Keys[key] = GL_FALSE;
+		if(action == GLFW_PRESS){
+//			Jump.Keys[key] = GL_TRUE;
+			Jump.InputHandler.Keys[key] = GL_TRUE;
+		}
+		else if(action == GLFW_RELEASE){
+//			Jump.Keys[key] = GL_FALSE;
+//			Jump.KeysProcessed[key] = GL_FALSE;
+			Jump.InputHandler.Keys[key] = GL_FALSE;
+			Jump.InputHandler.KeysProcessed[key] = GL_FALSE;
+		}
 	}
+
 	// if(glfwJoystickPresent(GLFW_JOYSTICK_1))
 	// {
 	// 	RPG.initGamepad();
