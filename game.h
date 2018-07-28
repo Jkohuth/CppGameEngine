@@ -15,8 +15,8 @@
 #include <vector>
 #include <memory>
 
-#include <tmxlite/Map.hpp>
-#include <array>
+//#include <tmxlite/Map.hpp>
+//#include <array>
 
 
 /*
@@ -41,7 +41,7 @@ const GLfloat VICTORYITEM_RADIUS(15);
 
 // Game holds all game-related state and functionality.
 // Combines all game-related data into a single class
-// for easy access to each of the components and manageability
+// Where new functionality is added and tested before branching it out
 
 class Game
 {
@@ -53,7 +53,7 @@ public:
 	GLboolean					KeysProcessed[1024];
 	GLboolean 					canPress = true;
 	GLuint						Width, Height;
-	tmx::Map 					map;
+//	tmx::Map 					map;
 //	glm::mat4 projectionMatrixLevel;
 //	std::vector<std::unique_ptr<MapLayer>> mapLayers;
 //	void LoadMap();

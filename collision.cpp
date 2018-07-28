@@ -19,13 +19,16 @@ GlobalEnum::PlayerCondition Collision::DoPlayerTerrainCollisions(CharacterObject
 			case NONE:
 				break;
 			case UP: 
-				one.playerState.velocity.y = 0; 
-				one.Position.y += overlap.y;
+				if(one.playerState.velocity.y > 0){
+					one.playerState.velocity.y = 0; 
+					one.Position.y += overlap.y;
+				}
 				condition = GlobalEnum::GROUND;
 				break;
 			case DOWN:
 				one.playerState.velocity.y = 0;
 				one.Position.y -= overlap.y;
+				
 				condition = GlobalEnum::GROUND;
 
 				break;
@@ -43,7 +46,11 @@ GlobalEnum::PlayerCondition Collision::DoPlayerTerrainCollisions(CharacterObject
 	{
 		condition = GlobalEnum::MIDAIR;
 	//	grounded = false;
-	}
+	}//else if(std::get<0>(collider)==false && condition != GlobalEnum::GROUND)
+	//{
+	//	condition = GlobalEnum::MIDAIR;
+	//	grounded = false;
+	//}
 	return condition;
 
 }

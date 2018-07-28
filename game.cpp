@@ -12,9 +12,9 @@
 // Map stuff
 #include <glm/gtc/matrix_transform.hpp>
 
-#include <tmxlite/Map.hpp>
+//#include <tmxlite/Map.hpp>
 //#include <cassert>
-#include <array>
+//#include <array>
 
 #include <iostream>
 
@@ -118,7 +118,14 @@ void Game::Update(GLfloat dt)
 
 		Player->Physics(dt);
 		for(std::vector<GameObject>::iterator it = Terrain.begin(); it != Terrain.end(); it++){
-			Player->EditPlayerState(Collision->DoPlayerTerrainCollisions(*Player, *it));
+
+			GlobalEnum::PlayerCondition cond = Collision->DoPlayerTerrainCollisions(*Player, *it);
+			if(cond == GlobalEnum::GROUND){
+				Player->EditPlayerState(cond);
+				break;
+			}
+			Player->EditPlayerState(cond);
+			//Player->EditPlayerState(Collision->DoPlayerTerrainCollisions(*Player, *it));
 					
 		}
 		if(Collision->CheckCircleCollision(*VictoryItem, *Player))

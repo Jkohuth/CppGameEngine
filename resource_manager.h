@@ -12,7 +12,7 @@
 #include <cassert>
 
 #include <GL/glew.h>
-#include <Map.hpp>
+//#include <Map.hpp>
 #include "texture.h"
 #include "shader.h"
 //#include "map_layer.h"
@@ -53,7 +53,7 @@ private:
 	//static std::vector<GLuint> tileTextures;
 	//static std::vector<std::unique_ptr<MapLayer>> mapLayers;
 
-	static void loadMapTexturesFromFile(const tmx::Map& map);
+//	static void loadMapTexturesFromFile(const tmx::Map& map);
 };
 
 #endif

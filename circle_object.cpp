@@ -3,7 +3,7 @@
 //victory_object.cpp
 #include "circle_object.h"
 #include <iostream>
-//Use a sin function to handle it moving back and fourth across the screen what you have is dumb
+//Use a sin function to handle it moving back and fourth across the screen
 
 CircleObject::CircleObject() 
     : GameObject(), Radius(12.5f), isTouched(false)  { }

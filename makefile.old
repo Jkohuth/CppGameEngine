@@ -10,12 +10,24 @@ LIBRARIES = -std=c++14 \
 			-L/usr/lib64/ \
 			-I/usr/include/ \
 			-I./ \
-			-I./include/ \
-			-lglfw -lGL -lGLEW -lXrandr -lXi \
-			-lX11 \
+			-I.include \
+			-lglfw -lGL -lGLEW -lm -lXrandr -lXi \
+			-lX11 -lXxf86vm -lpthread\
 			-lfreetype -lSOIL \
-
-# Uncertain about these linkers use -lm -lpthread -lXxf86vm
+			-Wall -std=c++14 -stdlib=libc++\
+			-L/usr/local/opt/glew/lib \
+			-I/usr/local/opt/glew/include -lglew \
+			-L/usr/local/Cellar/glfw3/3.2.1/lib \
+			-I/usr/local/Cellar/glfw3/3.2.1/include -lglfw3\
+			-L/opt/local/lib -lSOIL\
+			-I/opt/local/include/SOIL\
+			-L/usr/local/include/freetype2 \
+			-I/usr/local/include/freetype2 -lfreetype\
+			-I/usr/local/include/tmxlite/ \
+			-L/usr/local/lib/ -ltmxlite \
+			-I./include\
+			-framework Cocoa -framework OpenGL -framework IOKit\
+			-framework CoreFoundation -framework CoreVideo\
 
 .PHONY : start clean
 
@@ -31,7 +43,7 @@ game.o : game.cpp game.h resource_manager.h sprite_renderer.h global_enumeration
 	$(CXX) $(LIBRARIES) -c game.cpp
 
 post_processor.o : post_processor.cpp post_processor.h texture.h sprite_renderer.h shader.h
-	$(CXX) $(LIBRARIES) -c post_processor.cpp
+	$(CXX) $(LIBRARIES) -c post_processor.CPP
 
 collision.o : collision.cpp collision.h game_object.h character_object.h circle_object.h global_enumerations.h
 	$(CXX) $(LIBRARIES) -c collision.cpp

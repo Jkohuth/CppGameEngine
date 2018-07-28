@@ -15,7 +15,7 @@ public:
 	GlobalEnum::GameState State;
 
 	GLfloat jumpHeight = 5.0f;
-	GLfloat timeToJumpApex = 2.0f;
+	GLfloat timeToJumpApex = 1.0f;
 	GLfloat terminalVelocity = 0.5f;
 	GLfloat initVelocity;
 	GLfloat gravity;

@@ -21,8 +21,8 @@
 #include <ft2build.h>
 #include FT_FREETYPE_H
 // GL includes
-#include "Shader.h"
-#include "Texture.h"
+#include "shader.h"
+#include "texture.h"
 #include "sprite_renderer.h"
 #include "gl_macros.hpp"
 

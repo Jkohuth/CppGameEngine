@@ -56,7 +56,6 @@ glm::vec2 CharacterObject::MovePlayer(GLfloat dt, GlobalEnum::Direction directio
 		this->velocity.x = 0;
 	}
 }*/
-// Resets the ball to initial Stuck Position (if ball is outside winow bounds)
 void CharacterObject::Reset(glm::vec2 position)
 {
 	this->Position = position;
@@ -64,7 +63,7 @@ void CharacterObject::Reset(glm::vec2 position)
 }
 void CharacterObject::MovePlayer(GlobalEnum::PlayerInput input)
 {
-	playerState.condition = input.condition;
+	//playerState.condition = input.condition;
 	playerState.velocity = input.velocity;
 }
 void CharacterObject::Physics(GLfloat dt){
@@ -72,16 +71,16 @@ void CharacterObject::Physics(GLfloat dt){
 	switch(playerState.condition){
 		case GlobalEnum::GROUND:
 		
-			std::cout<<"GROUND\n";
+			//std::cout<<"GROUND\n";
 			break;
 		case GlobalEnum::MIDAIR:
-			std::cout<<"MIDAIR\n";
+			//std::cout<<"MIDAIR\n";
 
 //			if(this->velocity.y < this->terminalVelocity)
 //				this->velocity.y += this->gravity;
 			break;
 		case GlobalEnum::UNDER_WATER:
-			std::cout<<"UNDER_WATER\n";
+			//std::cout<<"UNDER_WATER\n";
 
 			break;
 
