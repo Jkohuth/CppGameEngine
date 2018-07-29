@@ -6,10 +6,10 @@
 
 using namespace GlobalEnum;
 
-GlobalEnum::PlayerCondition Collision::DoPlayerTerrainCollisions(CharacterObject &one, GameObject &two){
+GlobalEnum::ColliderCondition Collision::DoPlayerTerrainCollisions(CharacterObject &one, GameObject &two){
 
 	Collider collider = CheckCollision(one, two);
-	GlobalEnum::PlayerCondition condition;
+	GlobalEnum::ColliderCondition condition;
 // Back to this savagery
 	if(std::get<0>(collider) == true){
 		Direction dir = std::get<1>(collider);
@@ -29,7 +29,7 @@ GlobalEnum::PlayerCondition Collision::DoPlayerTerrainCollisions(CharacterObject
 				one.playerState.velocity.y = 0;
 				one.Position.y -= overlap.y;
 				
-				condition = GlobalEnum::GROUND;
+				condition = GlobalEnum::CEILING;
 
 				break;
 			case LEFT:

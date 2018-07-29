@@ -23,13 +23,15 @@ namespace GlobalEnum{
 		NONE
 	};
 // Really need better names for these things
-	enum PlayerCondition {
+	enum ColliderCondition {
 		GROUND,
 		MIDAIR,
+		CEILING,
+		WALL,
 		UNDER_WATER
 	};
 	struct PlayerInput {
-		GlobalEnum::PlayerCondition condition;
+		GlobalEnum::ColliderCondition condition;
 		glm::vec2 					velocity;
 
 	};

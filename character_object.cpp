@@ -12,7 +12,7 @@ CharacterObject::CharacterObject(glm::vec2 pos, glm::vec2 playerSize, glm::vec2 
 	playerState.condition = Condition;
 
 }
-void CharacterObject::EditPlayerState(GlobalEnum::PlayerCondition cond)
+void CharacterObject::EditPlayerState(GlobalEnum::ColliderCondition cond)
 {
 //	std::cout<<"Here is everything\n";
 	playerState.condition = cond;

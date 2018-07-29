@@ -119,7 +119,7 @@ void Game::Update(GLfloat dt)
 		Player->Physics(dt);
 		for(std::vector<GameObject>::iterator it = Terrain.begin(); it != Terrain.end(); it++){
 
-			GlobalEnum::PlayerCondition cond = Collision->DoPlayerTerrainCollisions(*Player, *it);
+			GlobalEnum::ColliderCondition cond = Collision->DoPlayerTerrainCollisions(*Player, *it);
 			if(cond == GlobalEnum::GROUND){
 				Player->EditPlayerState(cond);
 				break;

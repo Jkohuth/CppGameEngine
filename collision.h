@@ -17,7 +17,7 @@ typedef std::tuple<GLboolean, GlobalEnum::Direction, glm::vec2> Collider; // <Co
 class Collision
 {
 public: 
-	GlobalEnum::PlayerCondition DoPlayerTerrainCollisions(CharacterObject &one, GameObject &two);
+	GlobalEnum::ColliderCondition DoPlayerTerrainCollisions(CharacterObject &one, GameObject &two);
 	GLboolean CheckCircleCollision(CircleObject &one, GameObject &two);
 
 private:

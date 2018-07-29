@@ -25,7 +25,7 @@ public:
 	GLfloat							terminalVelocity = 5.0f;
 	GLfloat							xSpeed = 2.5;
 	GLboolean						isGrounded = false;
-	GlobalEnum::PlayerCondition 	Condition = GlobalEnum::MIDAIR;
+	GlobalEnum::ColliderCondition 	Condition = GlobalEnum::MIDAIR;
 	GlobalEnum::PlayerInput			playerState;
 
 	// Made the inherited class public to resolve the issue
@@ -38,7 +38,7 @@ public:
 	CharacterObject(glm::vec2 pos, glm::vec2 playerSize, glm::vec2 velocity, Texture2D sprite);
 //	glm::vec2 MovePlayer(GLfloat dt, GlobalEnum::Direction direction);
 	void MovePlayer(GlobalEnum::PlayerInput input);
-	void EditPlayerState(GlobalEnum::PlayerCondition cond);
+	void EditPlayerState(GlobalEnum::ColliderCondition cond);
 	//void xMotion(GLboolean left, GLboolean right);
 //	void	  SetVelocity();
 	void	  Reset(glm::vec2 position);
