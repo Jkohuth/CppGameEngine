@@ -3,10 +3,10 @@ OBJS = jump.o resource_manager.o game.o shader.o texture.o sprite_renderer.o cha
 		game_object.o text_renderer.o circle_object.o  post_processor.o collision.o input_handler.o 
 #map_renderer.o map_layer.o
 #OBJS = text_rendering.o texture.o shader.o resource_manager.o sprite_renderer.o
-CXX = clang++
-CFLAGS = -Wall -clang
+#CXX = clang++
+CFLAGS = -Wall
 LIBRARIES = 
-LIBRARIES = -std=c++14 \
+LIBRARIES = -std=c++17 \
 			-L/usr/lib64/ \
 			-L/usr/lib/x86_64-linux-gnu/ \
 			-I/usr/include/ \
