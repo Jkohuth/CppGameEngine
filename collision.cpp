@@ -34,11 +34,11 @@ GlobalEnum::ColliderCondition Collision::DoPlayerTerrainCollisions(CharacterObje
 				break;
 			case LEFT:
 				one.Position.x += overlap.x;
-				condition = GlobalEnum::GROUND;
+				condition = GlobalEnum::WALL;
 				break;
 			case RIGHT:
 				one.Position.x -= overlap.x;
-				condition = GlobalEnum::GROUND;
+				condition = GlobalEnum::WALL;
 				break;
 		}
 	}

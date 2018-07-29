@@ -10,7 +10,7 @@ InputHandler::InputHandler()
 {
 	gravity = (2*jumpHeight) /(pow(timeToJumpApex, 2.0f));
 	initVelocity = gravity * timeToJumpApex;
-	initVelocity = 50.0f;
+	initVelocity = 30.0f;
 	std::cout<<"Gravity "<<gravity<<std::endl;
 	std::cout<<"init Velocity "<<initVelocity<<std::endl;
 }
@@ -65,9 +65,11 @@ GlobalEnum::PlayerInput InputHandler::SingleControls(GlobalEnum::PlayerInput cur
 				if(returnValue.velocity.y < this->terminalVelocity)
 					returnValue.velocity.y += this->gravity;	
 				break;
-				case GlobalEnum::CEILING:
+			case GlobalEnum::CEILING:
 				if(returnValue.velocity.y < this->terminalVelocity)
 					returnValue.velocity.y += this->gravity;	
+				break;
+			case GlobalEnum::WALL:
 				break;
 			case GlobalEnum::UNDER_WATER:
 				break;
