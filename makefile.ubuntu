@@ -8,6 +8,7 @@ CFLAGS = -Wall -clang
 LIBRARIES = 
 LIBRARIES = -std=c++14 \
 			-L/usr/lib64/ \
+			-L/usr/lib/x86_64-linux-gnu/ \
 			-I/usr/include/ \
 			-I./ \
 			-I./include/ \
