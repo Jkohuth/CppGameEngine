@@ -5,7 +5,7 @@
 #include "text_renderer.h"
 #include "character_object.h"
 #include "circle_object.h"
-#include "post_processor.h"
+//#include "post_processor.h"
 #include "collision.h"
 //#include "map_renderer.h"
 
@@ -28,7 +28,7 @@ GameObject				*Menu;
 GameObject 				*Ground;
 GameObject 				*Obstacle;
 CircleObject			*VictoryItem;
-PostProcessor 			*Effects;
+//PostProcessor 			*Effects;
 Collision 				*Collision;
 GLfloat					ShakeTime = 0.0f;
 std::vector<GameObject>	Terrain;	
@@ -50,7 +50,7 @@ Game::~Game()
 	delete Renderer;
 	delete Player;
 	delete Menu;
-	delete Effects;
+//	delete Effects;
 	delete Collision;
 }
 
@@ -63,7 +63,7 @@ void Game::Init()
 	// Load Shaders
 	ResourceManager::LoadShader("shaders/sprite.vs", "shaders/sprite.frag", nullptr, "sprite");
 	ResourceManager::LoadShader("shaders/text.vs", "shaders/text.frag", nullptr, "text");
-	ResourceManager::LoadShader("shaders/post_processor.vs", "shaders/post_processor.frag", nullptr, "postprocessing");
+	//ResourceManager::LoadShader("shaders/post_processor.vs", "shaders/post_processor.frag", nullptr, "postprocessing");
 
 
 	// Configure Shaders
@@ -86,7 +86,7 @@ void Game::Init()
 	// Set render-specific controls
 	Renderer = new SpriteRenderer((ResourceManager::GetShader("sprite")));
 	Text = new TextRenderer((ResourceManager::GetShader("text")), "assets/fonts/retro.ttf");
-	Effects = new PostProcessor(ResourceManager::GetShader("postprocessing"), this->Width, this->Height);
+	//Effects = new PostProcessor(ResourceManager::GetShader("postprocessing"), this->Width, this->Height);
 
 	glm::vec2 playerPos = glm::vec2(this->Width/2 - PLAYER_SIZE.x/2, this->Height/2 - PLAYER_SIZE.y/2);
 	glm::vec2 itemPos = glm::vec2(this->Width/2 - VICTORYITEM_RADIUS, this->Height/4);
@@ -137,8 +137,8 @@ void Game::Update(GLfloat dt)
 		VictoryItem->Move(dt, this->Width);
 		if(ShakeTime > 0.0f){
 			ShakeTime -=dt;
-			if(ShakeTime <= 0.0f)
-				Effects->Shake = false;
+			if(ShakeTime <= 0.0f){}
+//				Effects->Shake = false;
 		}
 	}
 	//if(Player->Position.y + Player->Size.y >= Height) 
@@ -178,7 +178,7 @@ void Game::Render()
 		Text->RenderText(ResourceManager::GetShader("text").Use(), "First Game", 325.0f, 500.0f, 0.5f, glm::vec3(2.0f, 1.0f, 1.0f));
 		Text->RenderText(ResourceManager::GetShader("text").Use(), "JUMP", 295.0f, 435.0f, 2.0f, glm::vec3(2.0f, 1.0f, 1.0f));
 		Text->RenderText(ResourceManager::GetShader("text").Use(), "PRESS START", 300.0f, 100.0f, 0.75f, glm::vec3(2.0f, 1.0f, 1.0f));
-
+		
 	}
 	else if(this->State == GAME_OVERWORLD){
 
@@ -187,7 +187,7 @@ void Game::Render()
 			Player->Draw(*Renderer);
 			VictoryItem->Draw(*Renderer);
 			Obstacle->Draw(*Renderer);
-//			Menu->Draw(*Renderer);
+	//	Menu->Draw(*Renderer);
 	//	Effects->EndRender();
 	//	Effects->Render(glfwGetTime());
 	}
