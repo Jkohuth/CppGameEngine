@@ -6,7 +6,9 @@
 #include <sstream>
 #include <fstream>
 
-#include <SOIL.h>
+//#include <SOIL.h>
+#define STB_IMAGE_IMPLEMENTATION
+#include "stb_image.h"
 
 std::map<std::string, Texture2D>				ResourceManager::Textures;
 std::map<std::string, Shader>					ResourceManager::Shaders;
@@ -117,12 +119,14 @@ Texture2D ResourceManager::loadTextureFromFile(const GLchar *file, GLboolean alp
 		texture.Internal_Format = GL_RGBA;
 	}
 	// Load Image
-	int width, height;
-	unsigned char *image = SOIL_load_image(file, &width, &height, 0, texture.Image_Format == GL_RGBA ? SOIL_LOAD_RGBA : SOIL_LOAD_RGB);
+	int width, height, nrChannels;
+	//unsigned char *image = SOIL_load_image(file, &width, &height, 0, texture.Image_Format == GL_RGBA ? SOIL_LOAD_RGBA : SOIL_LOAD_RGB);
 	// Now Generate Texture
-	texture.Generate(width, height, image);
+  unsigned char *data = stbi_load(file, &width, &height, &nrChannels, 0);
+	texture.Generate(width, height, data);
+  stbi_image_free(data);
 	// And finally free image data
-	SOIL_free_image_data(image);
+	//SOIL_free_image_data(image);
 	return texture;
 }
 /*std::vector<GLuint> ResourceManager::GetTileTextures()

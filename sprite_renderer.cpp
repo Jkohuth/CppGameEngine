@@ -2,7 +2,7 @@
 
 #include "sprite_renderer.h"
 #include "gl_macros.hpp"
-
+#include <iostream>
 SpriteRenderer::SpriteRenderer(Shader &shader)
 {
 	this->shader = shader;
@@ -69,7 +69,7 @@ void SpriteRenderer::initRenderData()
 
 	glEnableVertexAttribArray(posID);
 	glVertexAttribPointer(posID, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(GLfloat), (GLvoid*)0);
-
+  std::cout<<"Sprite Renderer vector object "<<quadVAO<<" position "<<posID<<std::endl;
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	BINDVERTEXARRAY(0);
 

@@ -40,15 +40,15 @@ public:
 	// Hold the font once uploaded
 	std::map<GLchar, Character> Characters;
 	//Constructor (Inits shaders/fonts)
-	TextRenderer(Shader &shader, const char* filePathName);
+	TextRenderer(unsigned int width, unsigned int height);
 	//Destructor
 	~TextRenderer();
+  void Load(std::string font, unsigned int fontSize);
 
-void RenderText(Shader &shader, std::string text, GLfloat x, GLfloat y, GLfloat scale, glm::vec3 color);
-
+  void RenderText(std::string text, GLfloat x, GLfloat y, GLfloat scale, glm::vec3 color);
+  Shader TextShader;
 private:
 	// Render State
-	Shader shader;
 	GLuint textVAO;
 	GLuint textVBO;
 	// Initializes and configures the text's, buffer and vertex attrbutes

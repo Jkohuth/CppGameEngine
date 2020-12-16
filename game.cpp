@@ -62,7 +62,8 @@ void Game::Init()
 
 	// Load Shaders
 	ResourceManager::LoadShader("shaders/sprite.vs", "shaders/sprite.frag", nullptr, "sprite");
-	ResourceManager::LoadShader("shaders/text.vs", "shaders/text.frag", nullptr, "text");
+	//ResourceManager::LoadShader("shaders/texture.vs", "shaders/texture.fs", nullptr, "texture");
+	//ResourceManager::LoadShader("shaders/text.vs", "shaders/text.frag", nullptr, "text");
 	//ResourceManager::LoadShader("shaders/post_processor.vs", "shaders/post_processor.frag", nullptr, "postprocessing");
 
 
@@ -72,10 +73,6 @@ void Game::Init()
 	ResourceManager::GetShader("sprite").Use().SetInteger("image", 0);
 	ResourceManager::GetShader("sprite").SetMatrix4("projection", projection);
 
-	glm::mat4 textProjection = glm::ortho(0.0f, static_cast<GLfloat>(this->Width), 0.0f, static_cast<GLfloat>(this->Height));
-
-	ResourceManager::GetShader("text").Use().SetInteger("text", 0);
-	ResourceManager::GetShader("text").SetMatrix4("projection", textProjection);
 
 	// Load Textures
 	ResourceManager::LoadTexture("assets/textures/map/greyBrickGround.png", GL_TRUE, "ground");
@@ -85,7 +82,7 @@ void Game::Init()
 
 	// Set render-specific controls
 	Renderer = new SpriteRenderer((ResourceManager::GetShader("sprite")));
-	Text = new TextRenderer((ResourceManager::GetShader("text")), "assets/fonts/retro.ttf");
+	//Text = new TextRenderer((ResourceManager::GetShader("text")), "assets/fonts/retro.ttf");
 	//Effects = new PostProcessor(ResourceManager::GetShader("postprocessing"), this->Width, this->Height);
 
 	glm::vec2 playerPos = glm::vec2(this->Width/2 - PLAYER_SIZE.x/2, this->Height/2 - PLAYER_SIZE.y/2);
@@ -108,7 +105,8 @@ void Game::Init()
 	Terrain.push_back(*Obstacle);
 
 	//this->LoadMap();
-
+  Text = new TextRenderer(this->Width, this->Height);
+  Text->Load("assets/fonts/retro.ttf", 24);
 }
 
 
@@ -175,9 +173,9 @@ void Game::Render()
 //	RenderMap->DrawMap();
 	if(this->State == GAME_START)
 	{
-		Text->RenderText(ResourceManager::GetShader("text").Use(), "First Game", 325.0f, 500.0f, 0.5f, glm::vec3(2.0f, 1.0f, 1.0f));
-		Text->RenderText(ResourceManager::GetShader("text").Use(), "JUMP", 295.0f, 435.0f, 2.0f, glm::vec3(2.0f, 1.0f, 1.0f));
-		Text->RenderText(ResourceManager::GetShader("text").Use(), "PRESS START", 300.0f, 100.0f, 0.75f, glm::vec3(2.0f, 1.0f, 1.0f));
+		Text->RenderText("First Game", 325.0f, 500.0f, 0.5f, glm::vec3(2.0f, 1.0f, 1.0f));
+		Text->RenderText("JUMP", 295.0f, 700.0f, 1.0f, glm::vec3(2.0f, 1.0f, 1.0f));
+		Text->RenderText("PRESS START", 300.0f, 100.0f, 2.f, glm::vec3(2.0f, 1.0f, 1.0f));
 		
 	}
 	else if(this->State == GAME_OVERWORLD){
@@ -193,12 +191,12 @@ void Game::Render()
 	}
 	else if(this->State == GAME_OVER)
 	{
-		Text->RenderText(ResourceManager::GetShader("text").Use(), "GAME OVER", 250.0f, 435.0f, 2.0f, glm::vec3(2.0f, 1.0f, 1.0f));
+		Text->RenderText("GAME OVER", 250.0f, 435.0f, 2.0f, glm::vec3(2.0f, 1.0f, 1.0f));
 
 	}
 	else if(this->State == GAME_WIN)
 	{
-		Text->RenderText(ResourceManager::GetShader("text").Use(), "YOU WIN!", 295.0f, 435.0f, 2.0f, glm::vec3(2.0f, 1.0f, 1.0f));
+		Text->RenderText("YOU WIN!", 295.0f, 435.0f, 2.0f, glm::vec3(2.0f, 1.0f, 1.0f));
 
 	}
 }

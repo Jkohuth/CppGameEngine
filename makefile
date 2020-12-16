@@ -14,7 +14,7 @@ LIBRARIES = -std=c++11 \
 			-I/usr/local/include/ \
 			-I./ \
 			-I./include/ \
-			-lglfw -lGL -lGLEW -lfreetype -lSOIL 
+			-lglfw -lGL -lGLEW -lfreetype 
 #			-lXrandr -lXi -lX11 
 
 # Uncertain about these linkers use -lm -lpthread -lXxf86vm
