@@ -3,10 +3,10 @@
 #ifndef GAME_H
 #define GAME_H
 
-#define GLEW_STATIC
+//#define GLEW_STATIC
 
-#include <GL/glew.h>
-#include <GLFW/glfw3.h>
+//#include <GL/glew.h>
+//#include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
 
 #include <ft2build.h>

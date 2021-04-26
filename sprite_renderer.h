@@ -3,8 +3,8 @@
 #ifndef SPRITE_RENDERER_H
 #define SPRITE_RENDERER_H
 
-#include <GL/glew.h>
-
+//#include <GL/glew.h>
+#include <glad/glad.h>
 #define GLM_FORCE_RADIANS
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>

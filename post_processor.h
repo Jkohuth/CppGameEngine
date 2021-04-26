@@ -3,7 +3,8 @@
 #ifndef POST_PROCESSOR_H
 #define POST_PROCESSOR_H
 
-#include <GL/glew.h>
+//#include <GL/glew.h>
+
 #include <glm/glm.hpp>
 
 #include "texture.h"

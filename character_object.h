@@ -3,7 +3,6 @@
 #ifndef CHARACTEROBJECT_H
 #define CHARACTEROBJECT_H
 
-#include <GL/glew.h>
 #include <glm/glm.hpp>
 
 #include "texture.h"

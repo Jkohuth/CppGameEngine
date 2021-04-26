@@ -3,15 +3,14 @@
 #ifndef RESOURCE_MANAGER_H
 #define RESOURCE_MANAGER_H
 
+#include <glad/glad.h>
 #define GLM_FORCE_RADIANS
-
 #include <map>
 #include <vector>
 #include <string>
 #include <memory>
 #include <cassert>
 
-#include <GL/glew.h>
 //#include <Map.hpp>
 #include "texture.h"
 #include "shader.h"

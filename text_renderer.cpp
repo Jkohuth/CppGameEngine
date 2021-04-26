@@ -1,7 +1,7 @@
 //text_renderer.cpp
 #define GLM_FORCE_RADIANS
 #include "text_renderer.h"
-#include "gl_macros.hpp"
+//#include "gl_macros.hpp"
 #include "resource_manager.h"
 //GLuint textVBO;
 #include <iostream>
@@ -14,19 +14,21 @@ TextRenderer::TextRenderer(unsigned int width, unsigned int height)
   GLuint posID;
   posID = glGetAttribLocation((GLuint)this->TextShader.id(), "vertex");
 
-  GENVERTEXARRAYS(1, &this->textVAO);
+  //GENVERTEXARRAYS(1, &this->textVAO);
+  glGenVertexArrays(1, &this->textVAO);
   glGenBuffers(1, &this->textVBO);
-  BINDVERTEXARRAY(this->textVAO);
+  //BINDVERTEXARRAY(this->textVAO);
+  glBindVertexArray(this->textVAO);
   glBindBuffer(GL_ARRAY_BUFFER, this->textVBO);
   glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 6 * 4, NULL, GL_DYNAMIC_DRAW);
   glEnableVertexAttribArray(0);  
 
-  //glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(float), 0);
-  glVertexAttribPointer(posID, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(float), 0);
+  glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(float), 0);
+ // glVertexAttribPointer(posID, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(float), 0);
   std::cout<<"Vector Array Object Text "<<textVAO<<" positionID "<<posID<<std::endl;
   glBindBuffer(GL_ARRAY_BUFFER, 0);
-  BINDVERTEXARRAY(0);
-
+  //BINDVERTEXARRAY(0);
+  glBindVertexArray(0);
 
 }
 
@@ -100,7 +102,8 @@ void TextRenderer::RenderText(std::string text, float x, float y, float scale, g
     this->TextShader.Use();
     this->TextShader.SetVector3f("textColor", color);
     glActiveTexture(GL_TEXTURE0);
-    BINDVERTEXARRAY(this->textVAO);
+    //BINDVERTEXARRAY(this->textVAO);
+    glBindVertexArray(this->textVAO);
 
     // iterate through all characters
     std::string::const_iterator c;
@@ -134,7 +137,9 @@ void TextRenderer::RenderText(std::string text, float x, float y, float scale, g
         // now advance cursors for next glyph
         x += (ch.Advance >> 6) * scale; // bitshift by 6 to get value in pixels (1/64th times 2^6 = 64)
     }
-    BINDVERTEXARRAY(0);
+    
+    //BINDVERTEXARRAY(0);
+    glBindVertexArray(0);
     glBindTexture(GL_TEXTURE_2D, 0);
 }
 /*void TextRenderer::RenderText(std::string text, GLfloat x, GLfloat y, GLfloat scale, glm::vec3 color)
@@ -148,8 +153,8 @@ void TextRenderer::RenderText(std::string text, float x, float y, float scale, g
   this->TextShader.SetVector3f("textColor", color);
 	//glUniform3f(glGetUniformLocation(shader.id(), "textColor"), color.x, color.y, color.z);
     glActiveTexture(GL_TEXTURE0);
-    BINDVERTEXARRAY(this->textVAO);
-
+    //BINDVERTEXARRAY(this->textVAO);
+    glBindVertexArray(this->textVAO);
     // Iterate through all characters
     std::string::const_iterator c;
     for (c = text.begin(); c != text.end(); c++) 
@@ -185,7 +190,8 @@ void TextRenderer::RenderText(std::string text, float x, float y, float scale, g
         // Now advance cursors for next glyph (note that advance is number of 1/64 pixels)
         x += (ch.Advance >> 6) * scale; // Bitshift by 6 to get value in pixels (2^6 = 64 (divide amount of 1/64th pixels by 64 to get amount of pixels))
     }
-    BINDVERTEXARRAY(0);
+    //BINDVERTEXARRAY(0);
+    glBindVertexArray(0);
     glBindTexture(GL_TEXTURE_2D, 0);
 
 
@@ -263,18 +269,21 @@ void TextRenderer::initTextRenderer(Shader &shader, const char* filePathName)
 
 		// Configure VAO/VBO for texture quads
 //		posID = glGetAttribLocation(ResourceManager::GetShader("text").Use(), "vertex");
-		GENVERTEXARRAYS(1, &this->textVAO);
-		glGenBuffers(1, &textVBO);
+		//GENVERTEXARRAYS(1, &this->textVAO);
+		glGenVertexArrays(1, &this->textVAO);
+    glGenBuffers(1, &textVBO);
 //		glGenBuffers(1, VBO);
 
-		BINDVERTEXARRAY(this->textVAO);
-		glBindBuffer(GL_ARRAY_BUFFER, textVBO);
+		//BINDVERTEXARRAY(this->textVAO);
+		glBindVertexArray(this->textVAO);
+    glBindBuffer(GL_ARRAY_BUFFER, textVBO);
 		glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat)* 6 * 4, NULL, GL_DYNAMIC_DRAW);
 
 		posID = glGetAttribLocation((GLuint)this->TextShader.id(), "vertex");
 		glEnableVertexAttribArray(posID);
 		glVertexAttribPointer(posID, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(GLfloat), (GLvoid*)0);
-		BINDVERTEXARRAY(0);
+		glBindVertexArray(this->textVAO);
+    //BINDVERTEXARRAY(0);
 
 //		this->RenderText(shader.Use(), "When you know what to do", 52.0f, 25.0f, 1.5f, glm::vec3(1.0, 0.8f, 1.0f));
 

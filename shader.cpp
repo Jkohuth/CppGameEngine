@@ -111,7 +111,7 @@ void Shader::checkCompileErrors(GLuint object, std::string type)
 {
 	GLint success;
 	GLchar infoLog[1024];
-	if(type != "PROGRAM")
+  if(type != "PROGRAM")
 	{
 		glGetShaderiv(object, GL_COMPILE_STATUS, &success);
 		if(!success)

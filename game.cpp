@@ -69,10 +69,13 @@ void Game::Init()
 
 	// Configure Shaders
 	glm::mat4 projection = glm::ortho(0.0f, static_cast<GLfloat>(this->Width), static_cast<GLfloat>(this->Height), 0.0f, -1.0f, 1.0f);
+  //glm::mat4 projection = glm::lookAt(glm::vec3(0.0f, 0.0f, 3.0f),
+  //                                   glm::vec3(0.0f, 0.0f, 0.0f),
+  //                                   glm::vec3(0.0f, 1.0f, 0.0f));
+  glm::mat4 textProjection = glm::ortho(0.0f, static_cast<GLfloat>(this->Width), 0.0f, static_cast<GLfloat>(this->Height));
 
 	ResourceManager::GetShader("sprite").Use().SetInteger("image", 0);
 	ResourceManager::GetShader("sprite").SetMatrix4("projection", projection);
-
 
 	// Load Textures
 	ResourceManager::LoadTexture("assets/textures/map/greyBrickGround.png", GL_TRUE, "ground");
@@ -116,7 +119,6 @@ void Game::Update(GLfloat dt)
 
 		Player->Physics(dt);
 		for(std::vector<GameObject>::iterator it = Terrain.begin(); it != Terrain.end(); it++){
-
 			GlobalEnum::ColliderCondition cond = Collision->DoPlayerTerrainCollisions(*Player, *it);
 			if(cond == GlobalEnum::GROUND){
 				Player->EditPlayerState(cond);
@@ -181,7 +183,9 @@ void Game::Render()
 	else if(this->State == GAME_OVERWORLD){
 
 	//	Effects->BeginRender();	
-			Ground->Draw(*Renderer);
+//			Renderer->DrawSprite(ResourceManager::GetTexture("block"), glm::vec2(200.0f, 200.0f),
+  //          glm::vec2(300.0f, 400.0f), 45.0f, glm::vec3(0.0f, 1.0f, 0.0f));
+      Ground->Draw(*Renderer);
 			Player->Draw(*Renderer);
 			VictoryItem->Draw(*Renderer);
 			Obstacle->Draw(*Renderer);

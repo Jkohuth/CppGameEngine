@@ -22,6 +22,7 @@ Shader 	 ResourceManager::LoadShader(const GLchar *vShaderFile, const GLchar *fS
 }
 Shader& 	 ResourceManager::GetShader(std::string name){
 	return Shaders[name];
+
 }
 Texture2D ResourceManager::LoadTexture(const GLchar *file, GLboolean alpha, std::string name){
 	Textures[name] = loadTextureFromFile(file, alpha);
@@ -60,7 +61,7 @@ void 	  ResourceManager::Clear(){
 		glDeleteProgram(iter.second.ID);
 	}
 	for(auto iter : Textures){
-		glDeleteTextures(1, &iter.second.ID);
+	  glDeleteTextures(1, &iter.second.ID);
 	}
 }
 

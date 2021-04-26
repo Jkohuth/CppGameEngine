@@ -2,13 +2,14 @@
 
 #include <stdlib.h>
 
-#define GLEW_STATIC
-#include <GL/glew.h>
+//#define GLEW_STATIC
+//#include <GL/glew.h>
+#include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #define GLM_FORCE_RADIANS
 #include <iostream>
 
-#include "gl_macros.hpp"
+//#include "gl_macros.hpp"
 #include "game.h"
 #include "resource_manager.h"
 #include "global_enumerations.h"
@@ -40,7 +41,7 @@ int main(int argc, char * argv[])
 	glfwSwapInterval(1); // <- Force interval
 
 	// Initiate GLEW and check to make sure it started correctly
-	glewExperimental = GL_TRUE;
+/*	glewExperimental = GL_TRUE;
 	GLenum glewError = glewInit();
 		if(glewError != GLEW_OK){
 			printf("glew init error\n%s\n", glewGetErrorString(glewError) );
@@ -49,9 +50,15 @@ int main(int argc, char * argv[])
 			printf("genVertexArrayAPPle supported\n");
 		} else if(GLEW_ARB_vertex_array_object){
 			printf("genVertexArrays supported\n");
-		}
-
-
+		} else {
+      printf("None supported Err");
+      return 0;
+    }
+*/
+  if(!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)){
+    std::cout<<"Failed to initialize GLAD" << std::endl;
+    return -1;
+  }
 	glfwSetKeyCallback(window, key_callback);
 
 	// OpenGL configuration
@@ -69,7 +76,7 @@ int main(int argc, char * argv[])
 
 	// Start Game within Menu State
 	Jump.State = GlobalEnum::GAME_START;
-
+  //Jump.State = GlobalEnum::GAME_OVERWORLD;
 
 	while( !glfwWindowShouldClose(window) ){
 
